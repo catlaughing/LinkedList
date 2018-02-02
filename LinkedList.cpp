@@ -5,6 +5,14 @@ using namespace std;
 
 //lihat dulu struck node di file .h nya
 
+node* findelm(node* head, int x)
+{
+    node* temp = head;
+    while (temp != NULL && temp->angka != x)
+        temp = temp->next;
+    return temp;
+}
+
 node* insertbegin(node* head,int x) //insert di awal
 {
     //Membuat variable node temporary
@@ -32,37 +40,19 @@ void Print(node* head) // Prosedur buat print
 }
 
 
-node *insertindex(node* head,int x) //Fungsi insert di index ke-
+node *insertafter(node* head,int x) //Fungsi insert di belakang salah satu angka
 {
-    int index; // index yang ingin diganti
-    int i = 0; // untuk mengiterasi
-    node* point = head; // buat variable sebagai jari penunjuk di tangan kanan
-    node* prev = new node; // buat 1 lagi jari penunjuk di tangan kiri untuk mengingat node sebelum point
-    node* temp = new node;// seperti biasa buat sebuah temporary node
-    cout<<"Masukkan index: "; // meminta user memasukkan index
-    cin>>index;
+    int index;
+    node* temp = new node;
     temp->angka = x; // masukkan data ke temporary node
     temp->next = NULL; // *penting harus didefinisikan kare itu biar saja temporary node ini menunjuk ketiadaan
-
-    if (index == 1) // jika user memasukkan index pertama berarti kita hanya perlu memanggil fungi diatas
-    {
-        return insertbegin(head, x);
-    }
-    else // jika tidak
-    {
-        do //looping selama pointer masih menunjuk ke sesuatu dan bukan NULL
-        {
-            if (i == index-1) // jika kita telah sampai ke index tujuan
-            {
-                temp->next = point; // kita hanya perlu membuat temp menunjuk ke node di index tersebut
-                prev->next = temp; // dan membuat index sebelumnya menunjuk ke temp
-            }
-            prev = point; //buat jari kiri menunjuk ke node yang sama dengan jari kanan
-            i++;// iterasi i
-            point = point->next; // pindahkan jari kanan 1 node di depan jari kiri
-
-        }while (point->next != NULL);
-    }
+    Print(head);
+    cout<<endl;
+    cout<<"Masukkan di belakang angka: "; // meminta user memasukkan index
+    cin>>index;
+    node *temp2 = findelm(head,index);
+    temp->next = temp2->next;
+    temp2->next = temp;
     return head; // kembalikan head sebagai awal dari list yang telah diubah
 }
 
@@ -79,15 +69,9 @@ node* insertlast(node* head, int x) // insert sebagai elemen terakhir
     }
     else // jika tidak
     {
-        while (true)
-        {
-            if (point->next == NULL)// jika setelah jari kita telah menunjuk node yang terakhir
-            {
-                point->next = temp; // kita hanya perlu membuat node yang kita tunjuk untum menunjuk ke node temp
-                break;// menghentika loop
-            }
+        while(point->next != NULL)// jika setelah jari kita telah menunjuk node yang terakhir
             point = point->next; // pindahkan jari telunjuk
-        }
+        point->next = temp; // kita hanya perlu membuat node yang kita tunjuk untum menunjuk ke node temp
     }
     return head;
 }

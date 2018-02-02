@@ -1,6 +1,12 @@
 #include <iostream>
 #include "LinkedList.h"
 
+/**
+Shadieq
+IF-41-08
+1301171087
+**/
+
 using namespace std;
 
 int number;
@@ -18,6 +24,7 @@ int main()
         <<"1. Insert di Depan"<<endl
         <<"2. Insert di index ke-"<<endl
         <<"3. Insert di Belakang"<<endl
+        <<"5. Mencari angka"<<endl
         <<"4. Berhenti"<<endl
         <<"Pilih: ";
         cin>>menu;
@@ -29,7 +36,6 @@ int main()
             return 0;
         }
 
-        cout<<endl;
         cout<<"Masukkan angka untuk di insert ke dalam list: ";
         cin>>number;
         cout<<endl;
@@ -44,7 +50,7 @@ int main()
         }
         else if (menu == 2)
         {
-            h = insertindex(h, number);
+            h = insertafter(h, number);
             cout<<"List saat ini: ";
             Print(h);
             cout<<endl;
